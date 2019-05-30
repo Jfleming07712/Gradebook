@@ -9,11 +9,11 @@ namespace GradeBook.test
         public void Test1()
         {
             //Arrange Section
-            var book = new Book("");
-            book.AddGrade(89.1);
-            book.AddGrade(90.5);
-            book.AddGrade(77.3);
+            var book = new Book("John's Grade Book");
+            
+            {
 
+            }
 
             //action section
             var result = book.GetStatistics();

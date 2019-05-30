@@ -42,8 +42,9 @@ namespace GradeBook
                 grades.Add(grade);
             }
             else
-            {
-                Console.WriteLine("Invalid value");
+            {   //This will throw an ArgumentException, that should be caught by try/catch in AddGrade
+                throw new ArgumentException($"Invalid {nameof(grade)}");
+
             }
         }
         public Statistics GetStatistics()

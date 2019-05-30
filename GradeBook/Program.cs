@@ -9,24 +9,37 @@ namespace GradeBook
         //avoid using static unless it is in a very specific circumstance
         static void Main(string[] args)
         {
-            //Making a new 
+            //Making a new object
             var book = new Book("John's Grade Book");
-            book.AddGrade(89.1);
-            book.AddGrade(90.5);
-            book.AddGrade(77.5);
-            var stats = book.GetStatistics();
+            // allows for users to add multiple grades using a looping statement
+            while (true)
+            {
+                Console.WriteLine($"Please enter a grade or 'q' to quit");
+                var input = Console.ReadLine();
 
-            //Writes the Average grade to the console formated to one decimal
-            Console.WriteLine($"The average grade is {stats.Average:N1}");
-            Console.WriteLine($"The highest grade is {stats.High:N1}");
-            Console.WriteLine($"The lowest grade is {stats.Low:N1}");
-            Console.WriteLine($"The letter grade is {stats.Letter}");
+                if (input == "q")
+                {
+                    break;
+                }
+                // Catching exeption created by the AddGrade methode
+                try
+                {
+                    var grade = double.Parse(input);
+                    book.AddGrade(grade);
+                }    
+                catch()
+                {
 
+                }
+            }
 
-            ////Makes a list of all the grades
-            //var grades = new List<double>() { 12.7, 10.3, 6.11, 4.1 };
-            //grades.Add(56.1);
+                var stats = book.GetStatistics();
 
+                //Writes the Average,High,Low grade to the console formated to one decimal
+                Console.WriteLine($"The average grade is {stats.Average:N1}");
+                Console.WriteLine($"The highest grade is {stats.High:N1}");
+                Console.WriteLine($"The lowest grade is {stats.Low:N1}");
+                Console.WriteLine($"The letter grade is {stats.Letter}");
         }
     }
 }
