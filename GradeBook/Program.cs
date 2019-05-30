@@ -27,9 +27,18 @@ namespace GradeBook
                     var grade = double.Parse(input);
                     book.AddGrade(grade);
                 }    
-                catch()
+                catch(ArgumentException ex)
                 {
-
+                    Console.WriteLine(ex.Message);
+                }
+                catch(FormatException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                // finally will execute if the try succeeds, as well as after the catch runs
+                finally
+                {
+                    Console.WriteLine("");
                 }
             }
 
