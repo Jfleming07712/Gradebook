@@ -10,14 +10,14 @@ namespace GradeBook
         static void Main(string[] args)
         {
             //Making a new object
-            var book = new InMemoryBook("John's Grade Book");
+            IBook book = new DiskBook("John's Grade Book");
             // allows for users to add multiple grades using a looping statement
             EnterGrades(book);
 
             var stats = book.GetStatistics();
 
             //Writes the Book Name and Average,High, and Low grade to the console formated to one decimal
-            Console.WriteLine("$For the book named {book.Name");
+            Console.WriteLine($"For the book named {book.Name}");
             Console.WriteLine($"The average grade is {stats.Average:N1}");
             Console.WriteLine($"The highest grade is {stats.High:N1}");
             Console.WriteLine($"The lowest grade is {stats.Low:N1}");
