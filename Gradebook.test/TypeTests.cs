@@ -3,10 +3,48 @@ using Xunit;
 
 namespace GradeBook.test
 {
+    
     public class TypeTests
     {
         [Fact]
         public void Test1()
+        {
+            var x = GetInt();
+            SetInt(ref x);
+
+            Assert.Equal(42, x);
+
+
+        }
+
+        private void SetInt(ref int x)
+        {
+            x = 42;
+        }
+
+        private int GetInt()
+        {
+            return 3;
+        }
+
+        [Fact]
+        public void CSharpCanPassByReference()
+        {
+            //Arrange Section
+            var book1 = GetBook("Book1");
+            GetBookSetName(ref book1, "New Name");
+
+            //action section
+
+            //assert section
+            Assert.Equal("New Name", book1.Name);
+        }
+        private void GetBookSetName(ref Book book, string name)
+        {
+            book = new Book(name);
+        }
+        [Fact]
+        public void CSharpIsPassByValue()
         {
             //Arrange Section
             var book1 = GetBook("Book1");
@@ -37,6 +75,21 @@ namespace GradeBook.test
         private void SetName(Book book, string name)
         {
             book.Name = name;
+        }
+
+        [Fact]
+        public void StringsBehaveLikeValueTypes()
+        {
+            string name = "John";
+            var upper = MakeUpperCase(name);
+
+            Assert.Equal("John", name);
+            Assert.Equal("JOHN", upper);
+        }
+
+        private string MakeUpperCase(string parameter)
+        {
+            return parameter.ToUpper();
         }
 
         [Fact]
