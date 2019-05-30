@@ -10,8 +10,22 @@ namespace GradeBook
         static void Main(string[] args)
         {
             //Making a new object
-            var book = new Book("John's Grade Book");
+            var book = new InMemoryBook("John's Grade Book");
             // allows for users to add multiple grades using a looping statement
+            EnterGrades(book);
+
+            var stats = book.GetStatistics();
+
+            //Writes the Book Name and Average,High, and Low grade to the console formated to one decimal
+            Console.WriteLine("$For the book named {book.Name");
+            Console.WriteLine($"The average grade is {stats.Average:N1}");
+            Console.WriteLine($"The highest grade is {stats.High:N1}");
+            Console.WriteLine($"The lowest grade is {stats.Low:N1}");
+            Console.WriteLine($"The letter grade is {stats.Letter}");
+        }
+
+        private static void EnterGrades(IBook book)
+        {
             while (true)
             {
                 Console.WriteLine($"Please enter a grade or 'q' to quit");
@@ -26,12 +40,12 @@ namespace GradeBook
                 {
                     var grade = double.Parse(input);
                     book.AddGrade(grade);
-                }    
-                catch(ArgumentException ex)
+                }
+                catch (ArgumentException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch(FormatException ex)
+                catch (FormatException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -41,14 +55,6 @@ namespace GradeBook
                     Console.WriteLine("");
                 }
             }
-
-                var stats = book.GetStatistics();
-
-                //Writes the Average,High,Low grade to the console formated to one decimal
-                Console.WriteLine($"The average grade is {stats.Average:N1}");
-                Console.WriteLine($"The highest grade is {stats.High:N1}");
-                Console.WriteLine($"The lowest grade is {stats.Low:N1}");
-                Console.WriteLine($"The letter grade is {stats.Letter}");
         }
     }
 }

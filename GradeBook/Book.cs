@@ -4,9 +4,43 @@ using System.Text;
 
 namespace GradeBook
 {
-     public class Book
+    public class NamedObject
     {
-        public Book(string name)
+        public NamedObject(string name)
+        {
+            Name = name;
+        }
+
+        public string Name
+        {
+            get;
+            set;
+        }
+    }
+
+    public interface IBook
+    {
+        void AddGrade(double grade);
+        Statistics GetStatistics();
+        string Name { get; }
+        
+    }
+    public abstract class Book : NamedObject, IBook
+    {
+        public Book(string name) : base(name)
+        {
+        }
+
+        public abstract void AddGrade(double grade);
+
+        public virtual Statistics GetStatistics()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class InMemoryBook : Book
+    {
+        public InMemoryBook(string name) : base(name)
         {
             //Initilizing grades
             grades = new List<double>();
@@ -15,7 +49,7 @@ namespace GradeBook
 
         public void AddLetterGrade(char letter)
         {
-          switch(letter)
+            switch(letter)
             {
                 case 'A':
                     AddGrade(90);
@@ -35,7 +69,7 @@ namespace GradeBook
             }
         }
         // Initilizing AddGrade
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             if(grade <= 100 && grade >= 0)
             {
@@ -47,7 +81,7 @@ namespace GradeBook
 
             }
         }
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var result = new Statistics();
 
@@ -94,7 +128,8 @@ namespace GradeBook
         }
 
         private List<double> grades;
-        public string Name;
+
+        private string name;
 
         
     }

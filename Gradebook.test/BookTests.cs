@@ -9,7 +9,7 @@ namespace GradeBook.test
         public void Test1()
         {
             //Arrange Section
-            var book = new Book("John's Grade Book");
+            var book = new InMemoryBook("John's Grade Book");
             
             {
 
